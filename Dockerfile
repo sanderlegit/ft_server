@@ -23,7 +23,6 @@ RUN apt-get update && \
 		php-mbstring \
 		php-fpm \
 		php-mysql \
-		#libnss3-tools \
 		nginx
 
 #Setting up phpmyadmin
