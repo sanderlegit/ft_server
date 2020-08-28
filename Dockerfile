@@ -23,6 +23,8 @@ RUN apt-get update && \
 		php-mbstring \
 		php-fpm \
 		php-mysql \
+		php-gd \
+		libnss3-tools \
 		nginx
 
 #Setting up phpmyadmin
@@ -80,7 +82,7 @@ RUN		chmod u+x ./set_autoindex_internal.sh
 
 #Increase the maximum upload size in the php.ini
 RUN		sed -i '/upload_max_filesize/c upload_max_filesize = 20M' /etc/php/7.3/fpm/php.ini
-RUN		sed -i '/post_max_size/c post_max_size = 21M' /etc/php/7.3/fpm/php.ini
+RUN		sed -i '/post_max_size/c post_max_size = 20M' /etc/php/7.3/fpm/php.ini
 
 #Commands to initialize container
 CMD	service nginx start && \
