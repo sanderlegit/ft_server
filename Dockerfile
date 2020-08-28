@@ -6,25 +6,31 @@ EXPOSE 80 443
 WORKDIR /root/
 
 #Installing packages
-RUN apt-get update && \
+#export command is to avoid an error my system throws:
+	#debconf: unable to initialize frontend: Dialog
+RUN export DEBIAN_FRONTEND=noninteractive && \
+	apt-get update && \
 	apt-get -y upgrade && \
 	apt-get install -y \
 		mariadb-server \
 		mariadb-client \
 		unzip \
 		wget \
-		php \
 		sudo \
-		sendmail \
+		php \
+		php-fpm \
 		php-cli \
 		php-cgi \
 		php7.3-zip \
 		php-json \
 		php-mbstring \
-		php-fpm \
 		php-mysql \
 		php-gd \
+		php-curl \
+		php-dom \
+		php-imagick \
 		libnss3-tools \
+		sendmail \
 		nginx
 
 #Setting up phpmyadmin
@@ -91,8 +97,3 @@ CMD	service nginx start && \
 	echo "127.0.0.1 localhost localhost.localdomain $(hostname)" >> /etc/hosts && \
 	service sendmail start && \
 	bash
-
-#test all wordpress normal features
-	#file upload
-	#comment
-	#blog post
